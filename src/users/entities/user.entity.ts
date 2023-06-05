@@ -6,13 +6,14 @@ import {
   OneToMany,
   PrimaryColumn,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   userId: number;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
