@@ -8,8 +8,9 @@ export class PostsService {
     return 'This action adds a new post';
   }
 
-  findAll() {
-    return `This action returns all posts`;
+  findAll(page: { page: number }) {
+    // console.log(page);
+    return `This action returns all posts in page ${page.page}`;
   }
 
   findOne(id: number) {
