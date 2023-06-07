@@ -12,5 +12,9 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsString()
+  passwordCheck: string;
+
+  @ApiProperty()
+  @IsString()
   userName: string;
 }
