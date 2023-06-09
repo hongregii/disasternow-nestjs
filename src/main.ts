@@ -3,9 +3,12 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { urlencoded } from 'express';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  // const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   // swagger UI 위한 설정
   const config = new DocumentBuilder()
@@ -42,6 +45,14 @@ async function bootstrap() {
 
   app.enableCors();
   app.use(urlencoded({ limit: '50mb', extended: true }));
+
+  // app.useStaticAssets(join(__dirname, 'uploads'), {
+  //   prefix: '/uploads',
+  //   index: false,
+  //   setHeaders: (res, path) => {
+  //     res.type('image/*');
+  //   },
+  // });
 
   await app.listen(3100);
 }

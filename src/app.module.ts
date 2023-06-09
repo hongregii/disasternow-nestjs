@@ -6,6 +6,9 @@ import { PostsModule } from './posts/posts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommentsModule } from './comments/comments.module';
 import { AuthModule } from './auth/auth.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
   imports: [
@@ -19,10 +22,15 @@ import { AuthModule } from './auth/auth.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'static'),
+      serveStaticOptions: { index: false },
+    }),
     UsersModule,
     PostsModule,
     CommentsModule,
     AuthModule,
+    TagsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

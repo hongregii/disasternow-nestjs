@@ -1,5 +1,6 @@
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { Comment } from 'src/comments/entities/comment.entity';
+import { Tag } from 'src/tags/entities/tag.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
   Column,
@@ -38,4 +39,7 @@ export class Post {
 
   @OneToMany(() => Comment, (comment) => comment.post)
   comments: Comment[];
+
+  @ManyToOne(() => Tag, (tag) => tag.posts)
+  tag: Tag;
 }

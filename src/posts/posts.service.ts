@@ -35,8 +35,7 @@ export class PostsService {
       .find
       // { relations: ['user'] }
       ();
-
-    return all.slice((page - 1) * 10, page * 10);
+    return all.reverse().slice((page - 1) * 10, page * 10);
   }
 
   findOne(id: number) {

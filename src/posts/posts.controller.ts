@@ -23,7 +23,7 @@ import Path = require('path');
 
 const storage = {
   storage: diskStorage({
-    destination: 'src/uploads/files',
+    destination: './static/files',
     filename: (req, file, cb) => {
       const filename: string = 'myfile-' + randomUUID();
       const extension: string = Path.parse(file.originalname).ext;
@@ -87,7 +87,6 @@ export class PostsController {
   findOne(@Param('id') id: string) {
     return this.postsService.findOne(+id);
   }
-
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
     return this.postsService.update(+id, updatePostDto);
