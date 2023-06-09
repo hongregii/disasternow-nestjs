@@ -10,6 +10,7 @@ import {
   DefaultValuePipe,
   UseInterceptors,
   UploadedFile,
+  BadRequestException,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -41,7 +42,7 @@ export class PostsController {
     return this.postsService.create(createPostDto);
   }
 
-  @Post('image/:postId')
+  @Post('image')
   @UseInterceptors(FileInterceptor('file', storage))
   @ApiBody({
     required: true,
@@ -60,24 +61,25 @@ export class PostsController {
   // async post(@UploadedFile() file): Promise<void> {
   //   console.log(file);
   // }
-  async postImg(@UploadedFile() formData: any) {
+  async postImg(@UploadedFile() formData: Express.Multer.File) {
     // return this.postsService.postImage(formData);
-    console.log(formData.path);
-    return formData.path;
+    console.log(formData);
+    if (!formData) {
+      return new BadRequestException('이미지 파일이 없습니다.');
+    }
+    return { status: 201, path: formData.path };
   }
 
   @Get()
   @ApiQuery({ name: 'page' })
-  findAll(
-    @Query('page', new DefaultValuePipe(1)) page: { page: number | undefined },
-  ) {
-    console.log('controller - page', page);
-    console.log('controller - page.page', page.page);
-    if (page === undefined) {
-      // console.log('here');
+  findAll(@Query() query: { page: number | 'undefined' }) {
+    console.log('controller - query', query);
+    const page = query.page;
+    if (page === 'undefined') {
+      console.log('no qp');
       return this.postsService.findAll(1);
     }
-    // console.log('there');
+    console.log('yes qp page : ', page);
     return this.postsService.findAll(page);
   }
 

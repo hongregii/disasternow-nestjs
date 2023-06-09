@@ -27,10 +27,10 @@ export class Post {
   @Column()
   content: string;
 
-  @Column()
+  @Column({ nullable: true })
   img: string;
 
-  @Column()
+  @Column({ nullable: true })
   location: string;
 
   @Column()

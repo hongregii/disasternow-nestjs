@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePostDto {
@@ -12,18 +12,22 @@ export class CreatePostDto {
 
   @ApiProperty()
   @IsString()
+  @IsOptional()
   address?: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNumber()
+  @IsOptional()
   lng?: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNumber()
+  @IsOptional()
   lat?: string;
 
   @ApiProperty()
   @IsString()
+  @IsOptional()
   img?: string;
 
   @ApiProperty()
@@ -32,5 +36,6 @@ export class CreatePostDto {
 
   @ApiProperty()
   @IsString()
+  @IsOptional()
   password?: string;
 }

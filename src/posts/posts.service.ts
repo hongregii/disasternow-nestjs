@@ -30,6 +30,7 @@ export class PostsService {
   // }
 
   async findAll(page) {
+    console.log('service - page : ', page);
     const all = await this.postRepository
       .find
       // { relations: ['user'] }
