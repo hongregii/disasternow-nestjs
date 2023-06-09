@@ -8,11 +8,17 @@ export class Comment {
   commentId: number;
 
   @ManyToOne(() => Post, (post) => post.comments)
-  postId: Post;
+  post: Post;
 
   @ManyToOne(() => User, (user) => user.comments)
-  userId: User;
+  user: User;
 
   @Column()
-  content: string;
+  userName: string;
+
+  @Column()
+  comment: string;
+
+  @Column()
+  createdAt: Date;
 }

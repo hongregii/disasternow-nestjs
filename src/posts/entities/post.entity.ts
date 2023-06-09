@@ -16,7 +16,10 @@ export class Post {
   postId: number;
 
   @ManyToOne(() => User, (user) => user.posts)
-  userId: User;
+  user: User;
+
+  @Column()
+  userName: string;
 
   @Column()
   title: string;
@@ -27,6 +30,12 @@ export class Post {
   @Column()
   img: string;
 
-  @OneToMany(() => Comment, (comment) => comment.postId)
+  @Column()
+  location: string;
+
+  @Column()
+  createdAt: Date;
+
+  @OneToMany(() => Comment, (comment) => comment.post)
   comments: Comment[];
 }

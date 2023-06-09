@@ -1,1 +1,16 @@
-export class CreateCommentDto {}
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
+
+export class CreateCommentDto {
+  @ApiProperty()
+  @IsString()
+  userName: string;
+
+  @ApiProperty()
+  @IsString()
+  password?: string;
+
+  @ApiProperty()
+  @IsString()
+  comment: string;
+}

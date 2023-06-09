@@ -19,12 +19,12 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ unique: true })
   userName: string;
 
-  @OneToMany(() => Post, (post) => post.userId)
+  @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
 
-  @OneToMany(() => Comment, (comment) => comment.userId)
+  @OneToMany(() => Comment, (comment) => comment.user)
   comments: Comment[];
 }
