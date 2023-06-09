@@ -69,6 +69,8 @@ export class TagsService {
     // 이전 응답값과 현재 응답값 비교 로직 작성
     // 변화가 있는 경우 true 반환, 그렇지 않으면 false 반환
     if (this.previousResponse !== currentResponse) {
+      console.log('prev : ', this.previousResponse);
+      console.log('current : ', currentResponse);
       return true;
     } else return false;
   }

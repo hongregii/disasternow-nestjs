@@ -31,13 +31,11 @@ export class PostsService {
 
   async findAll(page) {
     console.log('service - page : ', page);
-    const all = await this.postRepository
-      .find
-      // { relations: ['user'] }
-      ();
+    const all = await this.postRepository.find({ order: { postId: 'DESC' } });
+    console.log('all.length', all.length);
     return {
-      data: all.reverse().slice((page - 1) * 10, page * 10),
-      totalPage: (all.length % 10) - 1,
+      data: all.slice((page - 1) * 10, page * 10),
+      totalPage: Math.ceil(all.length / 10),
     };
   }
 

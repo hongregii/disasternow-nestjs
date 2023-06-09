@@ -32,7 +32,16 @@ export class Post {
   img: string;
 
   @Column({ nullable: true })
-  location: string;
+  address: string;
+
+  @Column({ nullable: true })
+  lng: string;
+
+  @Column({ nullable: true })
+  lat: string;
+
+  @Column({ nullable: true })
+  password: string;
 
   @Column()
   createdAt: Date;
